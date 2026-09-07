@@ -6,12 +6,19 @@ for (let i = 0; i < 16; i++) {
   container.appendChild(divCon);
 
   for (let j = 0; j < 16; j++) {
-    let div = document.createElement("div");
-    div.className = "squares";
+    let squares = document.createElement("div");
+    squares.className = "squares";
 
-    div.style.width = "16px";
-    div.style.height = "16px";
+    squares.style.width = "16px";
+    squares.style.height = "16px";
 
-    divCon.appendChild(div);
+    divCon.appendChild(squares);
+
+    squares.addEventListener("mouseenter", () => {
+      squares.style.backgroundColor = "blue";
+    });
+    squares.addEventListener("mouseleave", () => {
+      squares.style.backgroundColor = "yellow";
+    });
   }
 }
