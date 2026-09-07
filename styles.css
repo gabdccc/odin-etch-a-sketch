@@ -3,3 +3,18 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+.boxContainer {
+    display: flex;
+    min-height: 100dvh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.divContainer {
+    display: flex;
+}
+.squares {
+    background-color: red;
+    border: 1px solid black;
+}
