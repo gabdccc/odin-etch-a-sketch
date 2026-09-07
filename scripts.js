@@ -11,6 +11,10 @@ function numPrompt(text) {
     Number(input) <= 0 ||
     Number(input) > 100
   ) {
+    if (input === null) {
+      return 4;
+    }
+
     input = window.prompt(
       "Please enter a positive whole number from 1 to 100",
       "",
@@ -20,27 +24,32 @@ function numPrompt(text) {
   return Number(input);
 }
 
-function newGrid(rows, columns) {
+function newGrid(numberWant) {
   const container = document.createElement("div");
   container.className = "boxContainer";
 
-  for (let i = 0; i < columns; i++) {
+  const squareSize = 644 / numberWant;
+
+  for (let i = 0; i < numberWant; i++) {
     const divCon = document.createElement("div");
     divCon.className = "divContainer";
+    divCon.style.display = "flex";
+
     container.appendChild(divCon);
 
-    for (let j = 0; j < rows; j++) {
+    for (let j = 0; j < numberWant; j++) {
       const squares = document.createElement("div");
       squares.className = "squares";
 
-      squares.style.width = "16px";
-      squares.style.height = "16px";
+      squares.style.width = `${squareSize}px`;
+      squares.style.height = `${squareSize}px`;
 
       divCon.appendChild(squares);
 
       squares.addEventListener("mouseenter", () => {
         squares.style.backgroundColor = "#e76f51";
       });
+
       squares.addEventListener("mouseleave", () => {
         squares.style.backgroundColor = "#e9c46a";
       });
@@ -53,13 +62,10 @@ function newGrid(rows, columns) {
 newGrid(16, 16);
 
 btn.addEventListener("click", () => {
-  const numSquareRow = numPrompt("How many squares do you want for the row?");
-  const numSquareColumn = numPrompt(
-    "How many squares do you want for the column?",
-  );
+  const numSquare = numPrompt("How many squares do you want?");
 
   const oldContainer = document.querySelector(".boxContainer");
   oldContainer.remove();
 
-  newGrid(numSquareRow, numSquareColumn);
+  newGrid(numSquare);
 });
