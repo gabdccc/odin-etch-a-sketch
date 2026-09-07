@@ -15,10 +15,10 @@ for (let i = 0; i < 16; i++) {
     divCon.appendChild(squares);
 
     squares.addEventListener("mouseenter", () => {
-      squares.style.backgroundColor = "blue";
+      squares.style.backgroundColor = "#e76f51";
     });
     squares.addEventListener("mouseleave", () => {
-      squares.style.backgroundColor = "yellow";
+      squares.style.backgroundColor = "#e9c46a";
     });
   }
 }
