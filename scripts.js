@@ -13,7 +13,7 @@ function numPrompt(text) {
     Number(input) > 100
   ) {
     if (input === null) {
-      return 4;
+      return 16;
     }
 
     input = window.prompt(
@@ -27,9 +27,15 @@ function numPrompt(text) {
 
 function newGrid(numberWant) {
   const container = document.createElement("div");
-  container.className = "boxContainer";
-
+  const removeBorder = document.createElement("div");
   const squareSize = 644 / numberWant;
+
+  container.className = "boxContainer";
+  removeBorder.className = "removeBorder";
+
+  removeBorder.textContent = "Add SquareBorders";
+
+  container.appendChild(removeBorder);
 
   for (let i = 0; i < numberWant; i++) {
     const divCon = document.createElement("div");
@@ -56,7 +62,6 @@ function newGrid(numberWant) {
       });
     }
   }
-
   main.appendChild(container);
 }
 
@@ -76,5 +81,13 @@ resetSquaresBtn.addEventListener("click", () => {
 
   squaresCheck.forEach((squares) => {
     squares.style.backgroundColor = "#ca6248";
+  });
+});
+
+const removeBorderbtn = document.querySelector(".removeBorder");
+const squaresBorder = document.querySelectorAll(".squares");
+removeBorderbtn.addEventListener("click", () => {
+  squaresBorder.forEach((squares) => {
+    squares.classList.toggle("remove");
   });
 });
