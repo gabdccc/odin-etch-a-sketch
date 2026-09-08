@@ -11,7 +11,9 @@ main {
     justify-content: center;
     align-items: center;
 }
-.popup-ask {
+.popup-ask,
+.mini-box {
+    position: relative;
     cursor: pointer;
     padding: 1rem 2rem;
     background-color: #2a9d8f;
@@ -22,7 +24,8 @@ main {
     color: #e9c46a;
     font-size: 1.4rem;
 }
-.popup-ask:hover {
+.popup-ask:hover,
+.mini-box:hover {
     background-color: #ca6248;
 }
 .boxContainer {
@@ -42,4 +45,12 @@ main {
 .squares {
     background-color: #ca6248;
     border: 1px solid #e9c46a;
+}
+
+.small-box {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    gap: 1rem;
 }
