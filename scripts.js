@@ -28,14 +28,32 @@ function numPrompt(text) {
 function newGrid(numberWant) {
   const container = document.createElement("div");
   const removeBorder = document.createElement("div");
+  const toggleRGB = document.createElement("div");
   const squareSize = 644 / numberWant;
+
+  let isRGB = true;
 
   container.className = "boxContainer";
   removeBorder.className = "removeBorder";
+  toggleRGB.className = "toggleRGB";
 
   removeBorder.textContent = "Add SquareBorders";
+  toggleRGB.textContent = "Toggle RGB Pen";
 
   container.appendChild(removeBorder);
+  container.appendChild(toggleRGB);
+
+  toggleRGB.addEventListener("click", () => {
+    isRGB = !isRGB;
+  });
+
+  removeBorder.addEventListener("click", () => {
+    const squares = container.querySelectorAll(".squares");
+
+    squares.forEach((square) => {
+      square.classList.toggle("remove");
+    });
+  });
 
   for (let i = 0; i < numberWant; i++) {
     const divCon = document.createElement("div");
@@ -58,14 +76,21 @@ function newGrid(numberWant) {
       });
 
       squares.addEventListener("mouseleave", () => {
-        squares.style.backgroundColor = "#e9c46a";
+        if (isRGB) {
+          const r = Math.floor(Math.random() * 256);
+          const g = Math.floor(Math.random() * 256);
+          const b = Math.floor(Math.random() * 256);
+          squares.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        } else {
+          squares.style.backgroundColor = "#e9c46a";
+        }
       });
     }
   }
   main.appendChild(container);
 }
 
-newGrid(16, 16);
+newGrid(16);
 
 btn.addEventListener("click", () => {
   const numSquare = numPrompt("How many squares do you want?");
@@ -81,13 +106,5 @@ resetSquaresBtn.addEventListener("click", () => {
 
   squaresCheck.forEach((squares) => {
     squares.style.backgroundColor = "#ca6248";
-  });
-});
-
-const removeBorderbtn = document.querySelector(".removeBorder");
-const squaresBorder = document.querySelectorAll(".squares");
-removeBorderbtn.addEventListener("click", () => {
-  squaresBorder.forEach((squares) => {
-    squares.classList.toggle("remove");
   });
 });
