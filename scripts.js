@@ -1,5 +1,6 @@
 const main = document.querySelector("main");
 const btn = document.querySelector(".popup-ask");
+const resetSquaresBtn = document.querySelector(".mini-box");
 
 function numPrompt(text) {
   let input = window.prompt(text, "");
@@ -68,4 +69,12 @@ btn.addEventListener("click", () => {
   oldContainer.remove();
 
   newGrid(numSquare);
+});
+
+resetSquaresBtn.addEventListener("click", () => {
+  const squaresCheck = document.querySelectorAll(".squares");
+
+  squaresCheck.forEach((squares) => {
+    squares.style.backgroundColor = "#ca6248";
+  });
 });
