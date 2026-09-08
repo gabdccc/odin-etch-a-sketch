@@ -71,15 +71,33 @@ function newGrid(numberWant) {
 
       divCon.appendChild(squares);
 
+      let darkSquare = 0;
+      let color = null;
+
       squares.addEventListener("mouseenter", () => {
         squares.style.backgroundColor = "#e76f51";
       });
 
       squares.addEventListener("mouseleave", () => {
         if (isRGB) {
-          const r = Math.floor(Math.random() * 256);
-          const g = Math.floor(Math.random() * 256);
-          const b = Math.floor(Math.random() * 256);
+          if (color === null) {
+            color = {
+              r: Math.floor(Math.random() * 256),
+              g: Math.floor(Math.random() * 256),
+              b: Math.floor(Math.random() * 256),
+            };
+          }
+
+          if (darkSquare < 10) {
+            darkSquare++;
+          }
+
+          const darken = 1 - darkSquare * 0.1;
+
+          const r = Math.floor(color.r * darken);
+          const g = Math.floor(color.g * darken);
+          const b = Math.floor(color.b * darken);
+
           squares.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
         } else {
           squares.style.backgroundColor = "#e9c46a";
