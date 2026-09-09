@@ -1,6 +1,5 @@
 const main = document.querySelector("main");
 const btn = document.querySelector(".popup-ask");
-const resetSquaresBtn = document.querySelector(".mini-box");
 
 function numPrompt(text) {
   let input = window.prompt(text, "");
@@ -13,7 +12,7 @@ function numPrompt(text) {
     Number(input) > 100
   ) {
     if (input === null) {
-      return 16;
+      return null;
     }
 
     input = window.prompt(
@@ -27,31 +26,47 @@ function numPrompt(text) {
 
 function newGrid(numberWant) {
   const container = document.createElement("div");
-  const removeBorder = document.createElement("div");
+  const toggleBorder = document.createElement("div");
   const toggleRGB = document.createElement("div");
+  const barGroup = document.createElement("div");
+  const resetSquaresBtn = document.createElement("div");
+
   const squareSize = 644 / numberWant;
 
   let isRGB = true;
 
   container.className = "boxContainer";
-  removeBorder.className = "removeBorder";
+  toggleBorder.className = "toggleBorder";
   toggleRGB.className = "toggleRGB";
+  barGroup.className = "barGroup";
+  resetSquaresBtn.className = "mini-box";
 
-  removeBorder.textContent = "Add SquareBorders";
+  toggleBorder.textContent = "Add Square Borders";
+  resetSquaresBtn.textContent = "Reset";
   toggleRGB.textContent = "Toggle RGB Pen";
 
-  container.appendChild(removeBorder);
-  container.appendChild(toggleRGB);
+  barGroup.appendChild(toggleBorder);
+  barGroup.appendChild(resetSquaresBtn);
+  barGroup.appendChild(toggleRGB);
+  container.appendChild(barGroup);
 
   toggleRGB.addEventListener("click", () => {
     isRGB = !isRGB;
   });
 
-  removeBorder.addEventListener("click", () => {
+  toggleBorder.addEventListener("click", () => {
     const squares = container.querySelectorAll(".squares");
 
     squares.forEach((square) => {
-      square.classList.toggle("remove");
+      square.classList.toggle("toggle");
+    });
+  });
+
+  resetSquaresBtn.addEventListener("click", () => {
+    const squaresCheck = container.querySelectorAll(".squares");
+
+    squaresCheck.forEach((squares) => {
+      squares.style.backgroundColor = "#ca6248";
     });
   });
 
@@ -113,16 +128,12 @@ newGrid(16);
 btn.addEventListener("click", () => {
   const numSquare = numPrompt("How many squares do you want?");
 
+  if (numSquare === null) {
+    return;
+  }
+
   const oldContainer = document.querySelector(".boxContainer");
   oldContainer.remove();
 
   newGrid(numSquare);
-});
-
-resetSquaresBtn.addEventListener("click", () => {
-  const squaresCheck = document.querySelectorAll(".squares");
-
-  squaresCheck.forEach((squares) => {
-    squares.style.backgroundColor = "#ca6248";
-  });
 });
