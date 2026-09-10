@@ -81,6 +81,31 @@ function newGrid(numberWant) {
     });
   });
 
+  function paintSquare(squares) {
+    if (isRGB) {
+      if (squares.color === null) {
+        squares.color = {
+          r: Math.floor(Math.random() * 256),
+          g: Math.floor(Math.random() * 256),
+          b: Math.floor(Math.random() * 256),
+        };
+      }
+
+      if (squares.darkSquare < 10) {
+        squares.darkSquare++;
+      }
+
+      const darken = 1 - squares.darkSquare * 0.1;
+
+      const r = Math.floor(squares.color.r * darken);
+      const g = Math.floor(squares.color.g * darken);
+      const b = Math.floor(squares.color.b * darken);
+
+      squares.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    } else {
+      squares.style.backgroundColor = "#e9c46a";
+    }
+  }
   for (let i = 0; i < numberWant; i++) {
     const divCon = document.createElement("div");
     divCon.className = "divContainer";
@@ -101,30 +126,11 @@ function newGrid(numberWant) {
 
       squares.addEventListener("mouseenter", () => {
         if (isMouseDown) {
-          if (isRGB) {
-            if (squares.color === null) {
-              squares.color = {
-                r: Math.floor(Math.random() * 256),
-                g: Math.floor(Math.random() * 256),
-                b: Math.floor(Math.random() * 256),
-              };
-            }
-
-            if (squares.darkSquare < 10) {
-              squares.darkSquare++;
-            }
-
-            const darken = 1 - squares.darkSquare * 0.1;
-
-            const r = Math.floor(squares.color.r * darken);
-            const g = Math.floor(squares.color.g * darken);
-            const b = Math.floor(squares.color.b * darken);
-
-            squares.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-          } else {
-            squares.style.backgroundColor = "#e9c46a";
-          }
+          paintSquare(squares);
         }
+      });
+      squares.addEventListener("mousedown", () => {
+        paintSquare(squares);
       });
     }
   }
